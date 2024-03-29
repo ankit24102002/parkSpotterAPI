@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 
 namespace p2p.Common.Models
 {
+
+
+    public class ValidationError
+    {
+        public string ColumnName { get; set; }
+        public int RowNumber { get; set; }
+        public string ErrorMessage { get; set; }
+    }
+
     public class Space
     {
         public class Space_Owner_Master
