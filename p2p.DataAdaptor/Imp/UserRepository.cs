@@ -350,7 +350,7 @@ namespace p2p.DataAdaptor.Imp
           //  string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             string databaseName = "p2p";
             //   string qry = $"USE {databaseName};SELECT UserId,Username, Email,Password, Phone_Number, RoleID FROM User_Master where Username=@Username and Password=@Password";
-            string qry = $"USE {databaseName};SELECT UserId,Username, Email,Password, Phone_Number, RoleID FROM User_Master where Username=@Username ";
+            string qry = $"USE {databaseName};SELECT UserId,Username, Email,Password, Phone_Number, RoleID, user_image FROM User_Master where Username=@Username ";
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -376,6 +376,7 @@ namespace p2p.DataAdaptor.Imp
                                 Password = reader["Password"].ToString(),
                                 phoneno = reader["Phone_Number"].ToString(),
                                 RoleID = (int)reader["RoleID"],
+                                userImage= reader["user_image"].ToString()
                             };
                             return item;
                         }
@@ -395,19 +396,20 @@ namespace p2p.DataAdaptor.Imp
         {
             try
             {
+
                 string connString = _configuration["ConnectionStrings:dbcs"];
-              //  string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
                 using (SqlConnection connection = new SqlConnection(connString))
                 {
                     UserResponseData response = new UserResponseData() { IsSaved = false, Message = "" };
 
-                    connection.Open();            
+                    connection.Open();
                     using (SqlCommand command = new SqlCommand("UpdateUserProfile", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@Username", userProfileData.Detail.Username);
                         command.Parameters.AddWithValue("@Email", userProfileData.Detail.Email);
                         command.Parameters.AddWithValue("@Phone_Number", userProfileData.Detail.Phoneno);
+                        command.Parameters.AddWithValue("@user_image", userProfileData.Detail.UserImage);
 
                         command.Parameters.Add("@ErrorMessage", System.Data.SqlDbType.Char, 200);
                         command.Parameters["@ErrorMessage"].Direction = System.Data.ParameterDirection.Output;
@@ -417,7 +419,7 @@ namespace p2p.DataAdaptor.Imp
                         connection.Close();
                         string message = (string)command.Parameters["@ErrorMessage"].Value;
 
-                        if (i > 0)
+                        if (i != 0)
                         {
                             response.Message = message;
                             response.IsSaved = true;

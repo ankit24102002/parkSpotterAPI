@@ -23,6 +23,7 @@ namespace p2p.Common.Models
             public string roleName { get; set; }
             public bool Enable { get; set; }
             public int RoleID { get; set; }
+            public string userImage { get; set; }
             public string Token { get; set; }
             public string? ResetPasswordToken { get; set; }
             public DateTime ResetPasswordExpiry { get; set; }
