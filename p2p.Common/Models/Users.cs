@@ -71,6 +71,8 @@ namespace p2p.Common.Models
             public string Username { get; set; }
             public string Email { get; set; }
             public string Phoneno { get; set; }
+            public string UserImage { get; set; }
+
         }
         public class sugested_username
         {
