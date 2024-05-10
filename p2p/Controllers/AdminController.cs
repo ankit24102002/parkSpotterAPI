@@ -26,12 +26,14 @@ namespace p2p.Controllers
     public class AdminController : ControllerBase
     {
         private readonly IAdminManager _adminManager;
+        private readonly IConfiguration _configuration;
         private readonly ILogger<SpaceController> _logger;
 
-        public AdminController(IAdminManager adminManager,
+        public AdminController(IAdminManager adminManager, IConfiguration configuration,
             ILogger<SpaceController> logger)
         {
             _adminManager = adminManager;
+            _configuration = configuration;
             _logger = logger;
         }
 
@@ -331,8 +333,8 @@ namespace p2p.Controllers
 
         private void SaveData(List<Space_Owner_Master> records)
         {
-
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+         //   string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             using (var connection = new SqlConnection(connString))
             {
                 connection.Open();

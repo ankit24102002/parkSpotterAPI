@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using p2p.Common.Models;
 using p2p.DataAdaptor.Contract;
 using p2p.DataAdaptor.SqlManager;
@@ -17,10 +18,12 @@ namespace p2p.DataAdaptor.Imp
     {
 
         private readonly ILogger<AdminRepository> _logger;
-        public AdminRepository(ILogger<AdminRepository> logger)
+        private readonly IConfiguration _configuration;
+        public AdminRepository(ILogger<AdminRepository> logger, IConfiguration configuration)
         {
             _logger = logger;
             _logger.LogDebug("NLog is integrated to Customer repository Controller");
+            _configuration = configuration;
         }
 
 
@@ -28,7 +31,8 @@ namespace p2p.DataAdaptor.Imp
         {
             try
             {
-                string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+                string connString = _configuration["ConnectionStrings:dbcs"];
+             //   string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
                 List<Cus_and_own_detail> spaces = new List<Cus_and_own_detail>();
                 using (SqlConnection connection = new SqlConnection(connString))
                 {
@@ -87,8 +91,8 @@ namespace p2p.DataAdaptor.Imp
         {
             ResponseData response = new ResponseData() { IsSaved = false, Message = "" };
 
-
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+         //   string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 try

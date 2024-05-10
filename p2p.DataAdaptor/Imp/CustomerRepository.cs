@@ -31,7 +31,8 @@ namespace p2p.DataAdaptor.Imp
         //Returnig Info Of spaces by location and by avaliablity
         public List<Space_Owner_Master> GetByLocation(string Longitude, string Latitude)
         {/*
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+          *  string connString = _configuration["ConnectionStrings:dbcs"];
+           // string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             List<Space_Owner_Master> spaces = new List<Space_Owner_Master>();
             using (SqlConnection connection = new SqlConnection(connString))
             {
@@ -231,7 +232,7 @@ LEFT JOIN
         {
             try
             {
-                // string connString = "server=ANKIT; database=userdatabase; trusted_connection=true; Encrypt=False;";
+                // string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
                 string connString = _configuration["ConnectionStrings:dbcs"];
                 using (SqlConnection connection = new SqlConnection(connString))
                 {

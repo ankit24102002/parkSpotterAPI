@@ -14,13 +14,15 @@ namespace p2p.Controllers
     public class OwnerController : ControllerBase
     {
         private readonly IOwnerManager _ownerManager;
+        private readonly IConfiguration _configuration;
         private readonly ILogger<OwnerController> _logger;
 
-        public OwnerController(IOwnerManager ownerManager,
+        public OwnerController(IOwnerManager ownerManager, IConfiguration configuration,
             ILogger<OwnerController> logger)
         {
             _ownerManager = ownerManager;
             _logger = logger;
+            _configuration = configuration;
             _logger.LogDebug("NLog is integrated to space Controller");
         }
 

@@ -21,15 +21,17 @@ namespace p2p.Controllers
     public class SpaceController : ControllerBase
     {
         private readonly ICustomerManager _customerManager;
+        private readonly IConfiguration _configuration;
         private readonly ILogger<SpaceController> _logger;
         private readonly ParkingPredictionService _predictionService;
 
-        public SpaceController(ICustomerManager customerManager,
+        public SpaceController(ICustomerManager customerManager, IConfiguration configuration,
             ILogger<SpaceController> logger, ParkingPredictionService predictionService)
         {
             _customerManager = customerManager;
             _predictionService = predictionService;
             _logger = logger;
+            _configuration = configuration;
             _logger.LogDebug("NLog is integrated to space Controller");
         }
 

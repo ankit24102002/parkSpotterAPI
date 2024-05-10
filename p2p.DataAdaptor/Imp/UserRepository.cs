@@ -33,8 +33,8 @@ namespace p2p.DataAdaptor.Imp
         {
             UserResponseData response = new UserResponseData() { IsSaved = false, Message = "" };
 
-
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+           // string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 try
@@ -84,8 +84,8 @@ namespace p2p.DataAdaptor.Imp
         {
             string Username;
             string Password;
-
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+           // string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 using (SqlCommand command = new SqlCommand("VerifyUser", connection))
@@ -128,7 +128,8 @@ namespace p2p.DataAdaptor.Imp
 
         public AuthUser VerifyUser(AuthUser userdata)
         {
-            string connString = "server=ANKIT; database=BlogPostDatabase; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+          //  string connString = "server=ANKIT; database=BlogPostDatabase; trusted_connection=true; Encrypt=False;";
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 string databaseName = "p2p";
@@ -159,7 +160,8 @@ namespace p2p.DataAdaptor.Imp
 
         public LoginUser VerifyLoginUser(LoginUser userdata)
         {
-            string connString = "server=ANKIT; database=BlogPostDatabase; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+          //  string connString = "server=ANKIT; database=BlogPostDatabase; trusted_connection=true; Encrypt=False;";
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 string databaseName = "p2p";
@@ -192,7 +194,8 @@ namespace p2p.DataAdaptor.Imp
 
         public UserData GetLoginUserData(LoginUser userdata)
         {
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+          //  string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             string databaseName = "p2p";
             //   string qry = $"USE {databaseName};SELECT UserId,Username, Email,Password, Phone_Number, RoleID FROM User_Master where Username=@Username and Password=@Password";
             string qry = $"USE {databaseName};SELECT UserId,Username, Email,Password, Phone_Number, RoleID FROM User_Master where Username=@Username ";
@@ -239,7 +242,9 @@ namespace p2p.DataAdaptor.Imp
 
         public UserData checkemail(string email)
         {
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+
+            string connString = _configuration["ConnectionStrings:dbcs"];
+          //  string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             string databaseName = "p2p";
             string qry = $"USE {databaseName};SELECT UserId,Username, Email,Password, Phone_Number, RoleID,ResetPasswordToken,ResetPasswordExpiry FROM User_Master where Email=@Email ";
 
@@ -288,7 +293,8 @@ namespace p2p.DataAdaptor.Imp
 
         public UserResponseData updatetoken(UserData user)
         {
-            string connString = "server=ANKIT; database=userdatabase; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+          //  string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 UserResponseData response = new UserResponseData() { IsSaved = false, Message = "" };
@@ -313,7 +319,8 @@ namespace p2p.DataAdaptor.Imp
         }
 
         public UserResponseData updatepassword(string password,string username){
-                string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+           // string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
                 using (SqlConnection connection = new SqlConnection(connString))
                 {
                 UserResponseData response = new UserResponseData() { IsSaved = false, Message = "" };
@@ -339,8 +346,8 @@ namespace p2p.DataAdaptor.Imp
 
         public UserData Profiledata(AuthUser user)
         {
-
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+          //  string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             string databaseName = "p2p";
             //   string qry = $"USE {databaseName};SELECT UserId,Username, Email,Password, Phone_Number, RoleID FROM User_Master where Username=@Username and Password=@Password";
             string qry = $"USE {databaseName};SELECT UserId,Username, Email,Password, Phone_Number, RoleID FROM User_Master where Username=@Username ";
@@ -388,8 +395,8 @@ namespace p2p.DataAdaptor.Imp
         {
             try
             {
-
-                string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+                string connString = _configuration["ConnectionStrings:dbcs"];
+              //  string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
                 using (SqlConnection connection = new SqlConnection(connString))
                 {
                     UserResponseData response = new UserResponseData() { IsSaved = false, Message = "" };
@@ -436,7 +443,8 @@ namespace p2p.DataAdaptor.Imp
         {
 
             var similarUsernames = new List<string>();
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+           // string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             string databaseName = "p2p";
             string qry = $"USE {databaseName};SELECT Username FROM User_Master WHERE Username LIKE '%' + @Input + '%'";
 

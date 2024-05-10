@@ -6,9 +6,9 @@ namespace p2p
     public class ScheduleApiService : BackgroundService
     {
         private readonly ILogger<ScheduleApiService> _logger;
-       // private readonly TimeSpan interval = TimeSpan.FromHours(24);
+      // private readonly TimeSpan interval = TimeSpan.FromHours(24);
         
-       private readonly TimeSpan interval = TimeSpan.FromMinutes(1);
+      private readonly TimeSpan interval = TimeSpan.FromMinutes(1);
 
         public ScheduleApiService(ILogger<ScheduleApiService> logger)
         {
@@ -32,7 +32,7 @@ namespace p2p
         {
            
             _logger.LogInformation("Executing API logic...");
-            string connString = "server=ANKIT; database=userdatabase; trusted_connection=true; Encrypt=False;";
+            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 ResponseData response = new ResponseData() { IsSaved = false, Message = "" };

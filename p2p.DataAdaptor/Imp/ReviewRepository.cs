@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using p2p.DataAdaptor.Contract;
 using System;
 using System.Collections.Generic;
@@ -14,18 +15,20 @@ namespace p2p.DataAdaptor.Imp
     public class ReviewRepository : IReviewRepository
     {
         private readonly ILogger<ReviewRepository> _logger;
-        public ReviewRepository(ILogger<ReviewRepository> logger)
+        private readonly IConfiguration _configuration;
+        public ReviewRepository(ILogger<ReviewRepository> logger, IConfiguration configuration)
         {
             _logger = logger;
             _logger.LogDebug("NLog is integrated to Customer repository Controller");
+            _configuration = configuration;
         }
 
         public ResponseData Addrating(Rating value)
         {
             ResponseData response = new ResponseData() { IsSaved = false, Message = "" };
 
-
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+      //      string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 try

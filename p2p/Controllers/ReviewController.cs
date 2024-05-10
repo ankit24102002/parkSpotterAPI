@@ -12,12 +12,14 @@ namespace p2p.Controllers
     public class ReviewController : ControllerBase
     {
         private readonly IReviewManager _reviewManager;
+        private readonly IConfiguration _configuration;
         private readonly ILogger<ReviewController> _logger;
 
-        public ReviewController(IReviewManager reviewManager,
+        public ReviewController(IReviewManager reviewManager, IConfiguration configuration,
             ILogger<ReviewController> logger)
         {
             _reviewManager = reviewManager;
+            _configuration = configuration;
             _logger = logger;
             _logger.LogDebug("NLog is integrated to Review Controller");
         }

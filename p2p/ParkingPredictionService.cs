@@ -28,7 +28,8 @@ namespace p2p
         public ParkingPredictionService()
         {
 
-            string dataPath = @"D:\Desktop\dataset.csv";
+            string dataPath = @"D:\Desktop\parkspotter\dataset.csv";
+          
             _mlContext = new MLContext();
             var dataView = _mlContext.Data.LoadFromTextFile<ParkingData>(dataPath, hasHeader: true, separatorChar: ',');
 
@@ -54,7 +55,6 @@ namespace p2p
             // Output metrics
             Console.WriteLine($"RMSE: {metrics.RootMeanSquaredError}");
             Console.WriteLine($"MAE: {metrics.MeanAbsoluteError}");
-
         }
 
         public float PredictPrice(float hour, float dayOfWeek, float demand)

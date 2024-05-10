@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using p2p.Common.Models;
 using p2p.DataAdaptor.Contract;
 using p2p.DataAdaptor.SqlManager;
@@ -18,10 +19,12 @@ namespace p2p.DataAdaptor.Imp
     public class OwnerRepository: IOwnerRepository 
     {
         private readonly ILogger<OwnerRepository> _logger;
-        public OwnerRepository(ILogger<OwnerRepository> logger)
+        private readonly IConfiguration _configuration;
+        public OwnerRepository(ILogger<OwnerRepository> logger, IConfiguration configuration)
         {
             _logger = logger;
             _logger.LogDebug("NLog is integrated to Customer repository Controller");
+            _configuration = configuration;
         }
 
         public ResponseData DeleteSpace(int spaceid)
@@ -57,7 +60,8 @@ AND NOT EXISTS (
         {
             try
             {
-                string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+                string connString = _configuration["ConnectionStrings:dbcs"];
+              //  string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
                 List<cur_pasbooking> spaces = new List<cur_pasbooking>();
                 using (SqlConnection connection = new SqlConnection(connString))
                 {
@@ -217,7 +221,8 @@ So.Address_District as Address_District,
 
         public List<all_spaces> GetAllSpacesbyusername(string username)
         {
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+           // string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             List<all_spaces> spaces = new List<all_spaces>();
             using (SqlConnection connection = new SqlConnection(connString))
             {
@@ -263,7 +268,7 @@ Space_Image_Path";
                             {
                                 SpaceID = (int)reader["SpaceID"],
                               //  Username = reader["Username"].ToString(),
-                              //  RoleID = (int)reader["RoleID"],
+                            //  RoleID = (int)reader["RoleID"],
                              //  Longitude = reader["Longitude"].ToString(),
                              //   Latitude = reader["Latitude"].ToString(),
                                 Description = reader["Description"].ToString(),
@@ -294,7 +299,8 @@ Space_Image_Path";
         {
             try
             {
-                string connString = "server=ANKIT; database=userdatabase; trusted_connection=true; Encrypt=False;";
+                string connString = _configuration["ConnectionStrings:dbcs"];
+              //  string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
                 using (SqlConnection connection = new SqlConnection(connString))
                 {
                     ResponseData response = new ResponseData() { IsSaved = false, Message = "" };
@@ -336,9 +342,9 @@ AND NOT EXISTS (
 
         public ResponseData Disablespace(int spaceid)
         {
-            try
-            {
-                string connString = "server=ANKIT; database=userdatabase; trusted_connection=true; Encrypt=False;";
+            try {
+                string connString = _configuration["ConnectionStrings:dbcs"];
+               // string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
                 using (SqlConnection connection = new SqlConnection(connString))
                 {
                     ResponseData response = new ResponseData() { IsSaved = false, Message = "" };
@@ -381,8 +387,8 @@ AND NOT EXISTS (
         {
             ResponseData response = new ResponseData() { IsSaved = false, Message = "" };
 
-
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+          //  string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 try
@@ -423,7 +429,8 @@ AND NOT EXISTS (
 
         public List<detail_space> OwnerGetSpaceDetail(int spaceid)
         {
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+           // string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             List<detail_space> spaces = new List<detail_space>();
             using (SqlConnection connection = new SqlConnection(connString))
             {
@@ -470,8 +477,8 @@ AND NOT EXISTS (
         {
             try
             {
-
-                string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+                string connString = _configuration["ConnectionStrings:dbcs"];
+              //  string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
                 using (SqlConnection connection = new SqlConnection(connString))
                 {
                    ResponseData response = new ResponseData() { IsSaved = false, Message = "" };

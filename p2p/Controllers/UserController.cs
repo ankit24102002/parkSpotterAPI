@@ -131,7 +131,8 @@ namespace p2p.Controllers
             }
             if (new_password == confirm_password)
             {
-                string connString = "server=ANKIT; database=BlogPostDatabase; trusted_connection=true; Encrypt=False;";
+                string connString = _configuration["ConnectionStrings:dbcs"];
+                //string connString = "server=ANKIT; database=BlogPostDatabase; trusted_connection=true; Encrypt=False;";
                 using (SqlConnection connection = new SqlConnection(connString))
                 {
                     string databaseName = "BlogPostDatabase";
@@ -378,7 +379,7 @@ namespace p2p.Controllers
             }
            user.Password = PasswordHasher.HashPassword(resetPasswordDto.NewPassword);
 
-         
+
             // this method
             // var users = _userManager.updatepassword(user.Password,user.Username);
 
@@ -386,7 +387,8 @@ namespace p2p.Controllers
 
 
             // or this method
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = _configuration["ConnectionStrings:dbcs"];
+         //   string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 string databaseName = "p2p";
