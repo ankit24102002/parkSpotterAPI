@@ -65,7 +65,7 @@ namespace p2p.Common.Models
             public string Username { get; set; }
             public DetailModel Detail { get; set; }
         }
-
+        //user image addded
         public class DetailModel
         {
             public string Username { get; set; }
