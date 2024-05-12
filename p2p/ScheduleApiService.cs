@@ -32,7 +32,7 @@ namespace p2p
         {
            
             _logger.LogInformation("Executing API logic...");
-            string connString = "server=ANKIT; database=p2p; trusted_connection=true; Encrypt=False;";
+            string connString = "server=G-15\\PARKSPOTTER; database=p2p; trusted_connection=true; Encrypt=False;";
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 ResponseData response = new ResponseData() { IsSaved = false, Message = "" };

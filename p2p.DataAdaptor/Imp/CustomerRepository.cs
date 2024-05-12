@@ -296,8 +296,8 @@ LEFT JOIN
                 try
                 {
                     string databaseName = "p2p";
-                    string sql = $@"USE {databaseName};INSERT INTO BookingDetail (SpaceID, booking_amount, Username, StartBooking, EndBooking,Enable)
-                                            VALUES (@SpaceID, @booking_amount, @Username, @StartBooking, @EndBooking,1)";
+                    string sql = $@"USE {databaseName};INSERT INTO BookingDetail (SpaceID, booking_amount, Username, StartBooking, EndBooking,Enable,PaymentId)
+                                            VALUES (@SpaceID, @booking_amount, @Username, @StartBooking, @EndBooking,1,@PaymentId)";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -308,6 +308,7 @@ LEFT JOIN
                         command.Parameters.AddWithValue("@Username", detail.Username);
                         command.Parameters.AddWithValue("@StartBooking", detail.StartBooking);
                         command.Parameters.AddWithValue("@EndBooking", detail.EndBooking);
+                        command.Parameters.AddWithValue("@PaymentId", detail.paymentId);
 
 
 

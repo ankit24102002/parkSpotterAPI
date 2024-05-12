@@ -113,6 +113,7 @@ namespace p2p.Common.Models
             public DateTime StartBooking { get; set; }
             public DateTime EndBooking { get; set; }
             public Boolean Enable { get; set; }
+            public String paymentId {  get; set; }
         }
 
 
